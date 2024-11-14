@@ -23,11 +23,54 @@ public class Main
 
   public static int countProperContains(String word, String target)
   {
-    return 0;
+    int count = 0;
+    int N = target.length();
+    for (int i = 0; i < word.length() - (N-1); i++) {
+      String sub = word.substring(i, i+N);
+
+      boolean endOrSpaceAfter;
+      int endOfTarget = i + target.length();
+
+      if (endOfTarget == word.length()) {
+        endOrSpaceAfter = true;
+      } else {
+        String after = word.substring(endOfTarger, endOfTarget+1);
+        if after.equals(" ") {
+          endOrSpaceAfter = true;
+        } else {
+          endOrSpaceAfter = false;
+        }
+      }
+      endOrSpaceAfter = (endOfTarget == word.length()) || word.substring(endOfTarget, endOfTarget+1).equals(" ");
+      boolean beginOrSpaceBefore;
+      int startOfTarget = i;
+
+      if (startOfTarget == 0) {
+        beginOrSpaceBefore = true;
+      } else {
+        String before = word.substring(i - 1);
+        if before.equals(" ") {
+          beginOrSpaceBefore = true;
+        } else {
+          beginOrSpaceBefore = false;
+        }
+      }
+
+      beginOrSpaceBefore = (startOfTarget == 0) || word.substring(startOfTarget - 1, startOfTarget).equals(" ");
+      boolean properlyContained = beginOrSpaceBefore && endOrSpaceAfter;
+      if (sub.equals(target) && properlyContained) {
+        count++;
+      }
+    }
+    return count;
   }
 
   public static String deleteSub(String word, String target)
   {
-    return null;
+    while (indexOf(target) != -1) {
+      System.out.println(word.substring(0, indexOf(target) + word.substring(indexOf(target) + target.length)));
+    } else {
+      System.out.println("The word " + target + " does not appear in the word(s)");
+    }
   }
 }
